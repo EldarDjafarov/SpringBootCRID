@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Edit employer</title>
+
+
+</head>
+<body>
+
+<form action="#" th:action="@{/update/{id}(id=${employer.empID})}"  method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{employer.empName}" id="name" placeholder="Name">
+    <label for="active">Active</label>
+    <input type="checkbox" th:field="*{employer.empActive}" id="active" placeholder="Active">
+    <label for="dpName">DpName</label>
+    <input type="text" th:field="*{department.dpName}" id="dpName" value="dpName" placeholder="DpName">
+
+    <input type="submit" value="Update Employer">
+
+</form>
+</body>
+</html>

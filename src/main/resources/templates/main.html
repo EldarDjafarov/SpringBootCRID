@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"
+        xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Spring CRUD App</title>
+
+</head>
+<body >
+<div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
+
+    <h2>Grid View:</h2>
+    <form >
+    <table>
+        <thead>
+        <tr>
+            <th>EmpID</th>
+            <th>EmpName</th>
+            <th>EmpActive</th>
+            <th>DepName</th>
+        </tr>
+        </thead>
+
+        <th:block  th:each="department : ${departments}">
+            <td>
+                <tr th:each="employer : ${department.employers}">
+                    <td th:text="${employer.empID}"></td>
+                    <td th:text="${employer.empName}"></td>
+                    <td th:switch="${employer.empActive}">
+                        <span th:case="true" th:text="Yes"></span>
+                        <span th:case="false" th:text="No"></span>
+                        </td>
+                    <td th:text="${department.dpName}"></td>
+                    <td><a th:href="@{/edit/{id}(id=${employer.empID})}">Edit</a></td>
+                    <td><a th:href="@{/delete/{id}(id=${employer.empID})}">Delete</a></td>
+                </tr>
+            </td>
+
+        </th:block >
+
+
+    </table>
+    </form>
+
+
+
+<div>
+    <h2> Add Employer</h2>
+    <form action="#" th:action="@{/add}"  method="post">
+        <label for="name">Name</label>
+        <input type="text" th:field="*{employer.empName}" id="name" placeholder="Name">
+        <label for="active">Active</label>
+        <input type="checkbox" th:field="*{employer.empActive}" id="active" placeholder="Active">
+        <label for="dpName">DpName</label>
+        <input type="text" th:field="*{department.dpName}" id="dpName" value="dpName" placeholder="DpName">
+
+        <input type="submit" value="Add Employer">
+
+    </form>
+
+</div>
+
+</body>
+</html>
